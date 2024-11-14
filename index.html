@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .chat {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: flex-end;
+        }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        .chat-bubble {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            margin: 10px 0;
+            padding: 15px;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .chat-bubble.sent {
+            align-self: flex-end;
+            background-color: #dcf8c6;
+        }
+        .chat-bubble .message {
+            font-size: 16px;
+        }
+        .chat-bubble .timestamp {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 5px;
+        }
+        .chat-input {
+            border: none;
+            border-radius: 5px;
+            height: 10vh;
+            padding: 10px;
+            width: 100%;
+        }
+        .chat-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat">
+        <div class="chat-container" id="chat-container">
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+            <button id="send-button" class="chat-button">Send</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('send-button').addEventListener('click', function() {
+            var message = document.getElementById('chat-input').value;
+            if (message) {
+                var chatContainer = document.getElementById('chat-container');
+                var chatBubble = document.createElement('div');
+                chatBubble.classList.add('chat-bubble', 'sent');
+                var messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.innerHTML = message;
+                var timestampElement = document.createElement('div');
+                timestampElement.classList.add('timestamp');
+                timestampElement.innerHTML = new Date().toLocaleTimeString();
+                chatBubble.appendChild(messageElement);
+                chatBubble.appendChild(timestampElement);
+                chatContainer.appendChild(chatBubble);
+                document.getElementById('chat-input').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
